@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            background-image: linear-gradient(white,gold);
+            height: 400px;
+            width: 400px;
+            border-radius: 20px;
+            color: mediumvioletred;
+            font-weight: 900;
+            margin-left: 600px;
+            margin-top: 200px;
+            text-align: center;
+        }
+
+        body{
+            background-image: url(https://www.hdwallpapers.in/download/night_city_buildings_lights_4k_hd-1600x900.jpg);
+            height: 1500pxpx;
+            width: 1600px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="text" id="city" placeholder="please enter your city">
+    <button onclick="getData()"><b>&#128269</b></button><br><br><br>
+    <span id="info"></span><br>
+    <span id="temp"></span><br><br><br>
+    <span id="cloud" class="class1"></span><br>
+    <span id="humidity" class="class1"></span><br>
+    <span id="wind" class="class1"></span><br>
+</div>    
+<script>
+    async function getData(){
+
+
+        const cityName = document.getElementById('city').value;
+
+        const api = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=b57adc62c84f34adc51c83128495c38b`
+
+
+
+        const res = await fetch(api);
+        const data = await res.json();
+
+        document.getElementById("info").innerHTML = `Weather in ${cityName}`;
+        document.getElementById("temp").innerHTML = `${Math.trunc(data.main.temp/10)}`;
+        document.getElementById("info").innerHTML = `Pressure:${data.main.pressure/1000}kg/m^3`;
+        document.getElementById("info").innerHTML = `Humidity:${data.main.humidity}%`;
+        document.getElementById("info").innerHTML = `Wind:${data.main.speed}km/h`;
+
+    };
+</script>
+</body>
+</html>
